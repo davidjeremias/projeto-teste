@@ -36,6 +36,8 @@ public class Cliente {
 	
 	private String nome;
 	
+	private String cpf;
+	
 	@OneToOne(optional = false)
 	private Endereco endereco;
 	

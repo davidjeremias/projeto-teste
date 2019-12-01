@@ -35,7 +35,7 @@ public class Endereco {
 
 	private String bairro;
 	
-	private String cidade;
+	private String localidade;
 	
 	private String uf;
 	

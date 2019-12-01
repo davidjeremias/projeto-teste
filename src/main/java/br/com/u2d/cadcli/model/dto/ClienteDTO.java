@@ -3,6 +3,10 @@ package br.com.u2d.cadcli.model.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +25,25 @@ public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID = -2896222119640987429L;
 	
 	private Integer id;
+	
+	@NotBlank
+	@NotNull
+	@Size(max = 100, min = 3)
 	private String nome;
+	
+	@NotBlank
+	@NotNull
+	private String cpf;
+	
+	@NotBlank
+	@NotNull
 	private EnderecoDTO endereco;
+	
+	@NotBlank
+	@NotNull
 	private List<TelefoneDTO> telefones;
+	
+	@NotBlank
+	@NotNull
 	private List<EmailDTO> emails;
 }
