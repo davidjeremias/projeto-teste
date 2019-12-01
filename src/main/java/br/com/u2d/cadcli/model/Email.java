@@ -1,14 +1,9 @@
 package br.com.u2d.cadcli.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Builder;
@@ -18,15 +13,15 @@ import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "email")
 @Getter
 @Setter
 @Builder
 @EqualsAndHashCode(callSuper = false)
-public class Cliente {
+public class Email {
 
 	@Tolerate
-	public Cliente() {
+	public Email() {
 		super();
 	}
 	
@@ -34,16 +29,5 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;
-	
-	@OneToOne(optional = false)
-	private Endereco endereco;
-	
-	@OneToMany
-	@JoinColumn(name = "id_cliente", nullable = false)
-	private List<Telefone> telefones;
-	
-	@OneToMany
-	@JoinColumn(name = "id_cliente", nullable = false)
-	private List<Email> emails;
+	private String email;
 }
