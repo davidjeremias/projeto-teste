@@ -2,6 +2,7 @@ package br.com.u2d.cadcli.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,14 +39,14 @@ public class Cliente {
 	
 	private String cpf;
 	
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<Telefone> telefones;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<Email> emails;
 }

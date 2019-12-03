@@ -35,15 +35,9 @@ public class ClienteDTO implements Serializable{
 	@NotNull
 	private String cpf;
 	
-	@NotBlank
-	@NotNull
 	private EnderecoDTO endereco;
 	
-	@NotBlank
-	@NotNull
 	private List<TelefoneDTO> telefones;
 	
-	@NotBlank
-	@NotNull
 	private List<EmailDTO> emails;
 }

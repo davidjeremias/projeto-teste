@@ -27,7 +27,7 @@ public class ClienteController {
 	private ClienteService service;
 	
 	@PostMapping
-	public ResponseEntity<ClienteDTO> salvar(@Valid @RequestBody ClienteDTO clienteDTO){
+	public ResponseEntity<ClienteDTO> salvar(@Valid @RequestBody ClienteDTO clienteDTO) throws Exception{
 		ClienteDTO retorno = service.salvar(clienteDTO);
 		return new ResponseEntity<>(retorno, HttpStatus.CREATED);
 	}
@@ -39,21 +39,22 @@ public class ClienteController {
 				: new ResponseEntity<List<ClienteDTO>>(listaRetorno, HttpStatus.NO_CONTENT);
 	}
 	
-	@GetMapping("/{id}/buscaPorId")
-	public ResponseEntity<ClienteDTO> buscaPorId(@PathVariable Integer id){
+	@GetMapping("/{id}")
+	public ResponseEntity<ClienteDTO> buscaPorId(@PathVariable Integer id) throws Exception{
 		ClienteDTO retorno = service.buscaPorId(id);
 		return retorno != null ? new ResponseEntity<ClienteDTO>(retorno, HttpStatus.OK)
 				: new ResponseEntity<ClienteDTO>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping
-	public ResponseEntity<ClienteDTO> alterar(@RequestBody ClienteDTO clienteDTO){
+	public ResponseEntity<ClienteDTO> alterar(@RequestBody ClienteDTO clienteDTO) throws Exception{
 		ClienteDTO retorno = service.alterar(clienteDTO);
 		return new ResponseEntity<ClienteDTO>(retorno, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}/excluir")
-	public ResponseEntity<ClienteDTO> excluir(@PathVariable Integer id){
-		return null;
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ClienteDTO> excluir(@PathVariable Integer id) throws Exception{
+		service.excluir(id);
+		return new ResponseEntity<ClienteDTO>(HttpStatus.OK);
 	}
 }

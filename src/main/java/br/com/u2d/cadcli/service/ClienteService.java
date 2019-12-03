@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.u2d.cadcli.model.Cliente;
@@ -21,7 +22,7 @@ public class ClienteService {
 	@Autowired
 	ModelMapper model;
 
-	public ClienteDTO salvar(ClienteDTO clienteDTO) {
+	public ClienteDTO salvar(ClienteDTO clienteDTO) throws Exception {
 		Cliente cliente = model.map(clienteDTO, Cliente.class);
 		return model.map(repository.save(cliente), ClienteDTO.class);
 	}
@@ -36,14 +37,26 @@ public class ClienteService {
 		return listaDTO;
 	}
 
-	public ClienteDTO buscaPorId(Integer id) {
+	public ClienteDTO buscaPorId(Integer id) throws Exception {
 		Optional<Cliente> retorno = repository.findById(id);
+		if(!retorno.isPresent()) 
+			throw new Exception("Cliente não encontrado");
 		return model.map(retorno.get(), ClienteDTO.class);
 	}
 
-	public ClienteDTO alterar(ClienteDTO clienteDTO) {
+	public ClienteDTO alterar(ClienteDTO clienteDTO) throws Exception {
 		Cliente cliente = model.map(clienteDTO, Cliente.class);
+		if(!repository.existsById(cliente.getId()))
+			throw new Exception("Cliente não encontrado");
 		return model.map(repository.save(cliente), ClienteDTO.class);
+	}
+
+	public void excluir(Integer id) throws Exception {
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new Exception("Cliente não encontrado");
+		}
 	}
 
 }
