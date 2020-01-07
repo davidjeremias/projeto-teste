@@ -30,6 +30,7 @@ public class ClienteController {
 	public ResponseEntity<ClienteDTO> salvar(@Valid @RequestBody ClienteDTO clienteDTO) throws Exception{
 		ClienteDTO retorno = service.salvar(clienteDTO);
 		return new ResponseEntity<>(retorno, HttpStatus.CREATED);
+		
 	}
 	
 	@GetMapping
