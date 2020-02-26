@@ -32,6 +32,8 @@ public class EnderecoDTO implements Serializable{
 	@NotNull
 	private String logradouro;
 	
+	private String complemento;
+	
 	@NotBlank
 	@NotNull
 	private String bairro;
@@ -44,5 +46,9 @@ public class EnderecoDTO implements Serializable{
 	@NotNull
 	private String uf;
 	
-	private String complemento;
+	private String unidade;
+	
+	private String ibge;
+	
+	private String gia;
 }
